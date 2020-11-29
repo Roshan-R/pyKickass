@@ -12,12 +12,21 @@ class kickass:
             if not os.path.exists(sys.argv[i]):
                 print("Make sure those files exist")
 
+    def platformStuff(self):
+
+        if platform == "win32":
+            self.basename = sys.argv[1].split(".\\")[1].split(".")[0]
+            self.executable_name = self.basename + ".exe"
+        elif platform == "linux":
+            self.basename = sys.argv[1].split(".")[0]
+            self.executable_name = self.basename
 
     def readfile(self):
-        self.basename = sys.argv[1].split(".")[0]
+        print(sys.argv[1])
         try:
             with open(sys.argv[1], 'r') as file:
                 self.code = file.read()
+                self.platformStuff()
                 self.ctoalgo()
 
         except FileNotFoundError:
@@ -31,7 +40,7 @@ class kickass:
 
         text = re.sub(code_pattern,self.code, text)
         text = re.sub(algo_pattern,self.algorithm, text)
-        print(text)
+        #print(text)
         self.takescreenshot()
 
 
@@ -64,18 +73,21 @@ class kickass:
 
     def compile(self):
         try:
-            gcc_ret = subprocess.run(["gcc", sys.argv[1],"-o",self.basename])
+            gcc_ret = subprocess.run(["gcc", sys.argv[1],"-o",self.executable_name])
+            print("Compiling the code")
             if gcc_ret.returncode != 0:
                 print("You have some compile issues")
                 exit()
-            self.run()
-        except PermissionError:
+        except :
             print("Make sure you have gcc installed and it is in your $PATH variable")
             exit()
+        self.run()
 
     def run(self):
+        print("Compilation completed sucessfully!")
+        print("Running the program")
         if platform == "win32":
-            pass
+            run_cmd = subprocess.run(["cmd.exe"])
         elif platform == "linux":
             run_bash = subprocess.run(["bash"])
 
@@ -94,6 +106,8 @@ class kickass:
             win32api.keybd_event(win32con.VK_LWIN,0,win32con.KEYEVENTF_KEYUP,0) 
             win32api.keybd_event(0x53,0,win32con.KEYEVENTF_KEYUP,0)
 
+            import time
+            time.sleep(4) # It takes some time to register the screenshot into the clipboard
 
             from PIL import ImageGrab
             img = ImageGrab.grabclipboard()
