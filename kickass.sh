@@ -111,8 +111,6 @@ else
         #Replacing NULL
         sed -i "s/\x00/NULL/g" "$base.tex"
 
-
-
         #cleaning temp files
         rm temp
         rm baseout.tex
