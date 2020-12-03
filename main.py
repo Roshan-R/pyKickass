@@ -15,9 +15,8 @@ class kickass:
 
     def save_text(self):
         with open("outputfolder/output.txt", "w") as output:
-            print(self.text)
-            output.write("Hello")
-            output.write(self.text + r'\r\n\ '[:-1])
+
+            output.write(self.text)
             print("Output is written as output.tex")
 
         # os.rename("outputfolder/output.txt", "outputfolder/output.tex")
@@ -73,11 +72,13 @@ class kickass:
 
         if len(sys.argv) > 2 :
             if self.currentIndex == 1:
-                self.text = intro + first + section 
+                self.text = "%s%s%s" % (intro, first, section)
+                # self.text = intro + first + section 
             else:
-                    self.text = self.text.__str__() + section.__str__()
+                    self.section = "%s%s" % (self.text, section)
         else:
-            self.text = intro + first + section + end
+            self.text = "%s%s%s%s" %(intro, first, section, end)
+            # self.text = intro + first + section + end
 
         print()
         aim = input("Enter the aim of this program : ")
