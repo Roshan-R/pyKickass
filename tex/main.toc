@@ -1,0 +1,51 @@
+\contentsline {section}{\numberline {1}Binary Search Tree}{2}%
+\contentsline {subsection}{\numberline {1.1}Problem}{2}%
+\contentsline {subsection}{\numberline {1.2}Algorithm}{2}%
+\contentsline {subsection}{\numberline {1.3}Code}{4}%
+\contentsline {subsection}{\numberline {1.4}Sample output}{8}%
+\contentsline {subsection}{\numberline {1.5}Result}{9}%
+\contentsline {section}{\numberline {2}Graphs}{10}%
+\contentsline {subsection}{\numberline {2.1}Problem}{10}%
+\contentsline {subsection}{\numberline {2.2}Adjacency List and Adjacency Matrix}{10}%
+\contentsline {subsubsection}{\numberline {2.2.1}Algorithm-Adjacency List}{10}%
+\contentsline {subsubsection}{\numberline {2.2.2}Code-Adjacency List}{11}%
+\contentsline {subsubsection}{\numberline {2.2.3}Sample output}{14}%
+\contentsline {subsubsection}{\numberline {2.2.4}Algorithm-Adjacency Matrix}{15}%
+\contentsline {subsubsection}{\numberline {2.2.5}Code-Adjacency Matrix}{16}%
+\contentsline {subsubsection}{\numberline {2.2.6}Sample output}{19}%
+\contentsline {subsection}{\numberline {2.3}Depth First Search}{20}%
+\contentsline {subsubsection}{\numberline {2.3.1}Algorithm}{20}%
+\contentsline {subsubsection}{\numberline {2.3.2}Code}{22}%
+\contentsline {subsubsection}{\numberline {2.3.3}Sample output}{24}%
+\contentsline {subsection}{\numberline {2.4}Breadth First Search}{25}%
+\contentsline {subsubsection}{\numberline {2.4.1}Algorithm}{25}%
+\contentsline {subsubsection}{\numberline {2.4.2}Code}{27}%
+\contentsline {subsubsection}{\numberline {2.4.3}Sample output}{30}%
+\contentsline {subsection}{\numberline {2.5}Result}{30}%
+\contentsline {section}{\numberline {3}Sorting Techniques}{31}%
+\contentsline {subsection}{\numberline {3.1}Problem}{31}%
+\contentsline {subsection}{\numberline {3.2}Heap Sort}{31}%
+\contentsline {subsubsection}{\numberline {3.2.1}Algorithms}{31}%
+\contentsline {subsubsection}{\numberline {3.2.2}Code}{32}%
+\contentsline {subsubsection}{\numberline {3.2.3}Sample output}{34}%
+\contentsline {subsection}{\numberline {3.3}Merge Sort}{35}%
+\contentsline {subsubsection}{\numberline {3.3.1}Algorithm}{35}%
+\contentsline {subsubsection}{\numberline {3.3.2}Code}{36}%
+\contentsline {subsubsection}{\numberline {3.3.3}Sample output}{37}%
+\contentsline {subsection}{\numberline {3.4}Quick Sort}{38}%
+\contentsline {subsubsection}{\numberline {3.4.1}Algorithm}{38}%
+\contentsline {subsubsection}{\numberline {3.4.2}Code}{39}%
+\contentsline {subsubsection}{\numberline {3.4.3}Sample output}{40}%
+\contentsline {subsection}{\numberline {3.5}Result}{40}%
+\contentsline {section}{\numberline {4}Hash Table using Chaining Method}{41}%
+\contentsline {subsection}{\numberline {4.1}Problem}{41}%
+\contentsline {subsection}{\numberline {4.2}Algorithm}{41}%
+\contentsline {subsection}{\numberline {4.3}Code}{42}%
+\contentsline {subsection}{\numberline {4.4}Sample output}{45}%
+\contentsline {subsection}{\numberline {4.5}Result}{46}%
+\contentsline {section}{\numberline {5}Hash table using Linear Probing}{47}%
+\contentsline {subsection}{\numberline {5.1}Problem}{47}%
+\contentsline {subsection}{\numberline {5.2}Algorithm}{47}%
+\contentsline {subsection}{\numberline {5.3}Code}{48}%
+\contentsline {subsection}{\numberline {5.4}Sample output}{50}%
+\contentsline {subsection}{\numberline {5.5}Result}{50}%

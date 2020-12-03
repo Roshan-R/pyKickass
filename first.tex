@@ -1,10 +1,14 @@
 %%% Template originaly created by Karol Kozioł (mail@karol-koziol.net) and modified for ShareLaTeX use
 
-\documentclass[a4paper,11pt]{article}
+\documentclass[14pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{graphicx}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -33,9 +37,6 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 \theoremstyle{mytheor}
 \newtheorem{defi}{Definition}
 
-\title{--TITLE--}
-\author{--NAME--}
-\date{June 2020}
 
 % custom footers and headers
 \usepackage{fancyhdr}
@@ -43,7 +44,7 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 \lhead{}
 \chead{}
 \rhead{}
-\lfoot{\textbf{C Lab Experiments} }
+\lfoot{\textbf{--TITLE--} }
 \cfoot{}
 \rfoot{Page \thepage}
 \renewcommand{\headrulewidth}{0pt}
@@ -81,18 +82,47 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 
 \begin{document}
 
-\begin{titlepage}
-\maketitle
+
 \end{titlepage}
-\newpage
 
-\section*{Experiment --NUMBER-- }
+%%% -- Title page -- %%%
+\begin{titlepage}
+	\begin{center}
+	\fontsize{14pt}{14pt} \selectfont {College of Engineering Trivandrum}\\
+	\vspace*{0.8cm}
+	\vspace*{1.5cm}	
+	\fontsize{18pt}{1cm}\selectfont\textbf{{--TITLE--}}\\
+	\vspace*{0.8cm}
+	\vspace*{1.5cm}
+	\includegraphics[width=2in]{images/cet emblem.jpg}\\
+	\vspace*{2.5cm}
+	\fontsize{14pt}{14pt} \selectfont{--NAME--}\\
+	\vspace{0.2cm}
+	\fontsize{14pt}{14pt} \selectfont{S3 CSE Roll No:6}\\
+	\vspace*{0.2cm}
+	\fontsize{14pt}{14pt} \selectfont{TVE19CS006}\\
+	\vspace*{2cm}
+	\fontsize{18pt}{1cm}\selectfont {Department Of Computer Science}\\
+	\vspace{0.5cm}
+		\fontsize{18pt}{18pt}\selectfont{November 24, 2020}
+\end{center}
+\end{titlepage}
 
+\includegraphics[width=0.5in]{images/cet emblem 1.jpg}
+\hfill
+  \textbf{ \huge{\underline{--TITLE--}}}
 
-\vspace{20px}
+\section{Experiment --NUMBER-- }
+
 \subsection{Aim}
-Write a Program to find roots of a quadratic eqn
+--AIM--
+
 \subsection{Algorithm}
+\hline 
+\vspace{0.1cm}
+\hspace{0.2 cm}Algorithm --NUMBER--:--AIM--
+\vspace{0.1cm}
+\hline
 \begin{verbatim}
 --ALGORITHM--
 \end{verbatim}
@@ -100,12 +130,11 @@ Write a Program to find roots of a quadratic eqn
 
 \subsection{Code}
 \begin{lstlisting}[label={list:first}]
-
 --CODE--
-
 \end{lstlisting}
-\subsection{Output}
-\includegraphics[scale=0.5]{--OUTPUT--.png}
+
+\subsection{Sample output}
+\includegraphics[scale=0.5]{pics/--OUTPUT--.png}
 %use output here if output is imagg else include in main code
 
 \newpage
