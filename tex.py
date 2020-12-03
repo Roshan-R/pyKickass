@@ -1,4 +1,4 @@
-%%% Template originaly created by Karol Kozioł (mail@karol-koziol.net) and modified for ShareLaTeX use
+intro = r"""%%% Template originaly created by Karol KozioÅ (mail@karol-koziol.net) and modified for ShareLaTeX use
 
 \documentclass[14pt, letterpaper]{article}
 \usepackage[utf8]{inputenc}
@@ -107,10 +107,15 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 		\fontsize{18pt}{18pt}\selectfont{November 24, 2020}
 \end{center}
 \end{titlepage}
+"""
 
+first = r"""
 \includegraphics[width=0.5in]{images/cet emblem 1.jpg}
 \hfill
   \textbf{ \huge{\underline{--TITLE--}}}
+"""
+
+section = r"""
 
 \section{Experiment --NUMBER-- }
 
@@ -138,4 +143,9 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 %use output here if output is imagg else include in main code
 
 \newpage
+"""
+
+end = r"""
+
 \end{document}
+"""

@@ -4,22 +4,23 @@ import re
 import subprocess
 from sys import platform
 
+from texxx import intro, section, first, end
 class kickass:
 
     def __init__(self):
-        self.text = ""
         self.name = ""
         self.verifyFiles()
         self.kick()
         self.save_text()
 
     def save_text(self):
-        with open("outputfolder/output.txt", "w") as output:
-            print(type(self.text))
+        with open("outputfolder/output.txt", "wt") as output:
+            self.text = self.text.encode('ascii', 'ignore').decode('ascii')
+            print(self.text)
             output.write(self.text)
             print("Output is written as output.tex")
 
-        os.rename("outputfolder/output.txt", "outputfolder/output.tex")
+        # os.rename("outputfolder/output.txt", "outputfolder/output.tex")
         self.zipPref = input("Do you want to make a .zip file for uploading to overleaf (y/N) : ")
         if self.zipPref == "y" or self.zipPref == "Y":
 
@@ -72,14 +73,11 @@ class kickass:
 
         if len(sys.argv) > 2 :
             if self.currentIndex == 1:
-                with open("first.tex", 'r') as first:
-                    self.text = first.read()
+                self.text = intro + first + section 
             else:
-                with open('partbaseout.tex', 'r') as part:
-                    self.text = self.text + part.read()
+                    self.text = self.text + section
         else:
-            with open('baseout.tex', 'r') as base:
-                self.text = base.read()
+            self.text = intro + first + section + end
 
         print()
         aim = input("Enter the aim of this program : ")
@@ -104,7 +102,6 @@ class kickass:
         self.title = input("Enter the title : ")
 
         self.screenshot_pref = input("Do you want to take screenshot ? (Y/n) : ")
-        print(self.screenshot_pref)
 
         try:
             os.mkdir("outputfolder")
