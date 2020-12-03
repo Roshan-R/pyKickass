@@ -1,4 +1,4 @@
-intro = r"""%%% Template originaly created by Karol KozioÅ (mail@karol-koziol.net) and modified for ShareLaTeX use
+intro = r"""%%% Template originaly created by Karol Kozio0x00C5 (mail@karol-koziol.net) and modified for ShareLaTeX use
 
 \documentclass[14pt, letterpaper]{article}
 \usepackage[utf8]{inputenc}

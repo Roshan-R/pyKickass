@@ -4,7 +4,7 @@ import re
 import subprocess
 from sys import platform
 
-from texxx import intro, section, first, end
+from tex import intro, section, first, end
 class kickass:
 
     def __init__(self):
@@ -14,10 +14,10 @@ class kickass:
         self.save_text()
 
     def save_text(self):
-        with open("outputfolder/output.txt", "wt") as output:
-            self.text = self.text.encode('ascii', 'ignore').decode('ascii')
+        with open("outputfolder/output.txt", "w") as output:
             print(self.text)
-            output.write(self.text)
+            output.write("Hello")
+            output.write(self.text + r'\r\n\ '[:-1])
             print("Output is written as output.tex")
 
         # os.rename("outputfolder/output.txt", "outputfolder/output.tex")
@@ -75,7 +75,7 @@ class kickass:
             if self.currentIndex == 1:
                 self.text = intro + first + section 
             else:
-                    self.text = self.text + section
+                    self.text = self.text.__str__() + section.__str__()
         else:
             self.text = intro + first + section + end
 
