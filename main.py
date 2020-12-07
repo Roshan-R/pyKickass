@@ -185,20 +185,16 @@ class kickass:
             import win32api
             import win32con
 
-            win32api.keybd_event(win32con.VK_LSHIFT,0,0,0) 
-            win32api.keybd_event(win32con.VK_LWIN,0,0,0) 
-            win32api.keybd_event(0x53,0,0,0)
-
-            win32api.keybd_event(win32con.VK_LSHIFT,0,win32con.KEYEVENTF_KEYUP,0) 
-            win32api.keybd_event(win32con.VK_LWIN,0,win32con.KEYEVENTF_KEYUP,0) 
-            win32api.keybd_event(0x53,0,win32con.KEYEVENTF_KEYUP,0)
-
+            os.system('explorer.exe ms-screenclip:')
             import time
-            time.sleep(4) # It takes some time to register the screenshot into the clipboard
+            print('Screenshot captured. Opening image for viewing.')
+            time.sleep(9) # It takes some time to register the screenshot into the clipboard
 
             from PIL import ImageGrab
             img = ImageGrab.grabclipboard()
             img.show()
+            outputimage = "outputfolder/pics/" + self.basename + ".png"
+            img.save(outputimage, 'PNG')
 
         elif platform=="linux":
             try:
