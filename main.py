@@ -14,12 +14,15 @@ class kickass:
         self.save_text()
 
     def save_text(self):
-        with open("outputfolder/output.txt", "w") as output:
+        with open("outputfolder/output.tex", "w", encoding="ascii") as output:
 
+            self.text.replace(r'\0', 'null').replace('\x00', 'null')
+            self.text = self.text + "\n \\end{document}"
             output.write(self.text)
             print("Output is written as output.tex")
 
-        # os.rename("outputfolder/output.txt", "outputfolder/output.tex")
+            os.system("cp ./cet.jpg outputfolder/")
+
         self.zipPref = input("Do you want to make a .zip file for uploading to overleaf (y/N) : ")
         if self.zipPref == "y" or self.zipPref == "Y":
 
@@ -53,7 +56,7 @@ class kickass:
     def readfile(self):
         try:
             with open(sys.argv[self.currentIndex], 'r') as file:
-                self.code = file.read()
+                self.code = file.read().replace('\0', 'null').replace('\x00', 'null').replace(r'\0', 'null')
                 self.platformStuff()
                 self.ctoalgo()
 
@@ -72,12 +75,12 @@ class kickass:
 
         if len(sys.argv) > 2 :
             if self.currentIndex == 1:
-                self.text = "%s%s%s" % (intro, first, section)
+                self.text = "%s %s %s" % (intro, first, section)
                 # self.text = intro + first + section 
             else:
-                    self.section = "%s%s" % (self.text, section)
+                    self.text = "%s %s" % (self.text, section)
         else:
-            self.text = "%s%s%s%s" %(intro, first, section, end)
+            self.text = "%s %s %s %s" %(intro, first, section, end)
             # self.text = intro + first + section + end
 
         print()
@@ -206,6 +209,3 @@ class kickass:
 
 
 a = kickass()
-# a.verifyFiles()
-# a.readfile()
-# a.replace_stuff()

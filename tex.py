@@ -94,7 +94,7 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 	\fontsize{18pt}{1cm}\selectfont\textbf{{--TITLE--}}\\
 	\vspace*{0.8cm}
 	\vspace*{1.5cm}
-	\includegraphics[width=2in]{images/cet emblem.jpg}\\
+	\includegraphics[width=2in]{cet.jpg}\\
 	\vspace*{2.5cm}
 	\fontsize{14pt}{14pt} \selectfont{--NAME--}\\
 	\vspace{0.2cm}
@@ -110,7 +110,7 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 """
 
 first = r"""
-\includegraphics[width=0.5in]{images/cet emblem 1.jpg}
+\includegraphics[width=0.5in]{cet.jpg}
 \hfill
   \textbf{ \huge{\underline{--TITLE--}}}
 """
