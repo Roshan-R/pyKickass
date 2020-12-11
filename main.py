@@ -4,6 +4,14 @@ import re
 import subprocess
 from sys import platform
 
+
+
+# for NULL output
+try:
+    from subprocess import DEVNULL  # Python 3.
+except ImportError:
+    DEVNULL = open(os.devnull, 'wb')
+
 from tex import intro, section, first, end
 class kickass:
 
@@ -78,7 +86,7 @@ class kickass:
                 self.text = "%s %s %s" % (intro, first, section)
                 # self.text = intro + first + section 
             else:
-                    self.text = "%s %s" % (self.text, section)
+                self.text = "%s %s" % (self.text, section)
         else:
             self.text = "%s %s %s %s" %(intro, first, section, end)
             # self.text = intro + first + section + end
@@ -182,9 +190,6 @@ class kickass:
         self.compile()
 
         if platform == "win32":
-            import win32api
-            import win32con
-
             os.system('explorer.exe ms-screenclip:')
             import time
             print('Screenshot captured. Opening image for viewing.')
@@ -199,7 +204,20 @@ class kickass:
         elif platform=="linux":
             try:
                 outputimage = self.basename + ".png"
-                maim_ret = subprocess.run(["maim", "-s", "outputfolder/pics/"+ outputimage])
+                if os.getenv("WAYLAND_DISPLAY"): # If user is running wayland session
+
+                    grim = subprocess.run("grim", stdout=DEVNULL, stderr=DEVNULL)
+                    if grim.returncode == 1: # GNOME does not support grim screenshots
+                        subprocess.run(['gnome-screenshot', '-a', '-f', "outputfolder/pics/"+ outputimage]) #assuming the DE in question is GNOME
+                    else:
+                        try:
+                            cmd = 'grim -g "$(slurp)" outputfolder/pics/' + outputimage
+                            print(cmd)
+                            os.system(cmd)
+                        except:
+                            print("Not Working")
+                else:
+                    maim_ret = subprocess.run(["maim", "-s", "outputfolder/pics/"+ outputimage])
             except PermissionError:
                 print("Make sure maim is installed")
 
