@@ -4,22 +4,23 @@ import re
 import subprocess
 from sys import platform
 
-
-
 # for NULL output
 try:
     from subprocess import DEVNULL  # Python 3.
 except ImportError:
     DEVNULL = open(os.devnull, 'wb')
 
-from tex import intro, section, first, end
+from .tex import intro, section, first, end
 class kickass:
 
     def __init__(self):
+        for i in range(0, len(sys.argv)):
+            print(sys.argv[i])
         self.name = ""
         self.verifyFiles()
         self.kick()
         self.save_text()
+        exit()
 
     def save_text(self):
         with open("outputfolder/output.tex", "w", encoding="ascii") as output:
@@ -29,7 +30,7 @@ class kickass:
             output.write(self.text)
             print("Output is written as output.tex")
 
-            os.system("cp ./cet.jpg outputfolder/")
+            os.system("cp cet.jpg outputfolder/")
 
         self.zipPref = input("Do you want to make a .zip file for uploading to overleaf (y/N) : ")
         if self.zipPref == "y" or self.zipPref == "Y":
@@ -44,7 +45,7 @@ class kickass:
 
     def verifyFiles(self):
         import os.path
-        for i in range(1, len(sys.argv)):
+        for i in range(1, len(sys.argv)-1):
             if not os.path.exists(sys.argv[i]):
                 print("Make sure those files exist")
                 exit()
@@ -205,7 +206,8 @@ class kickass:
             try:
                 outputimage = self.basename + ".png"
                 if os.getenv("WAYLAND_DISPLAY"): # If user is running wayland session
-
+                    print("Using grim for taking screenshot..")
+                    print(os.getenv("WAYLAND_DISPLAY"))
                     grim = subprocess.run("grim", stdout=DEVNULL, stderr=DEVNULL)
                     if grim.returncode == 1: # GNOME does not support grim screenshots
                         subprocess.run(['gnome-screenshot', '-a', '-f', "outputfolder/pics/"+ outputimage]) #assuming the DE in question is GNOME
@@ -217,9 +219,13 @@ class kickass:
                         except:
                             print("Not Working")
                 else:
+                    print("Using maim for taking screenshot")
                     maim_ret = subprocess.run(["maim", "-s", "outputfolder/pics/"+ outputimage])
             except PermissionError:
                 print("Make sure maim is installed")
 
 
-a = kickass()
+def main():
+    a = kickass()
+
+main()
