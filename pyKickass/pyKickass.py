@@ -58,7 +58,7 @@ class kickass:
         if platform == "win32":
             self.basename = sys.argv[self.currentIndex].split(".\\")[1].split(".")[0]
             self.executable_name = self.basename + ".exe"
-        elif platform == "linux":
+        elif platform == "linux" or platform == "darwin":
             self.basename = sys.argv[self.currentIndex].split(".")[0]
             self.executable_name = self.basename
 
@@ -133,28 +133,28 @@ class kickass:
 
     def ctoalgo(self):
         replace_strings = {
-            "{":"",
-            "}":"",
-            "#.*":"",
-            r"\/\/.*":"",
-            # "ifs":"IF",
-            r"while\s*\((.*)\)":"WHILE \\1 : ",
-            r"\|\|":"or",
-            r"if\s(\(.*\))":"If \\1 THEN",
-            r"printf\s*\((.*)\);":"PRINT \\1",
-            r"puts\((.*)\)":"/PRINT \\1",
-            r"fgets\(([^,]*).*\)":"INPUT \\1",
-            r"scanf\((.*).*\)":"INPUT \\1",
-            r"--":" Decrements ",
-            r"\+\+":" Increments ",
-            r"for \(\w*\s(\w*)[^;]*; ([^;]*);.*\)":"FOR \\1 till \\2 do ",
-            r";":"",
-            r"return":"RETURN",
-            r"void (.*)\(.*\)|int (.*)\(.*\)":"Start of function \\1\\2",
-            r"\/\* [\w\W]* \*\/":"",
-            r"\/\*[\w\.\s]*\*\/":"",
+                "{":"",
+                "}":"",
+                "#.*":"",
+                r"\/\/.*":"",
+                # "ifs":"IF",
+                r"while\s*\((.*)\)":"WHILE \\1 : ",
+                r"\|\|":"or",
+                r"if\s(\(.*\))":"If \\1 THEN",
+                r"printf\s*\((.*)\);":"PRINT \\1",
+                r"puts\((.*)\)":"/PRINT \\1",
+                r"fgets\(([^,]*).*\)":"INPUT \\1",
+                r"scanf\((.*).*\)":"INPUT \\1",
+                r"--":" Decrements ",
+                r"\+\+":" Increments ",
+                r"for \(\w*\s(\w*)[^;]*; ([^;]*);.*\)":"FOR \\1 till \\2 do ",
+                r";":"",
+                r"return":"RETURN",
+                r"void (.*)\(.*\)|int (.*)\(.*\)":"Start of function \\1\\2",
+                r"\/\* [\w\W]* \*\/":"",
+                r"\/\*[\w\.\s]*\*\/":"",
 
-        }
+                }
         algorithm = self.code
         for key, value in replace_strings.items():
             algorithm = re.sub(key, value, algorithm)
@@ -162,18 +162,32 @@ class kickass:
         # print(self.algorithm)
 
     def compile(self):
-        try:
-            # print(self.executable_name)
+        if platform == "darwin":
             print("Compiling ...")
-            gcc_ret = subprocess.run(["gcc", sys.argv[self.currentIndex],"-o",self.executable_name])
-            if gcc_ret.returncode != 0:
-                print("You have some compile issues")
+            try:
+                clang_ret = subprocess.run(["clang", sys.argv[self.currentIndex],"-o",self.executable_name])
+                if clang_ret.returncode != 0:
+                    print("You have some compile issues")
+                    exit()
+                else:
+                    print("compilation completed sucessfully")
+            except :
+                print("Make sure you have clang installed and it is in your $PATH variable")
                 exit()
-            else:
-                print("compilation completed sucessfully")
-        except :
-            print("Make sure you have gcc installed and it is in your $PATH variable")
-            exit()
+        else:
+            try:
+                # print(self.executable_name)
+                print("Compiling ...")
+                gcc_ret = subprocess.run(["gcc", sys.argv[self.currentIndex],"-o",self.executable_name])
+                if gcc_ret.returncode != 0:
+                    print("You have some compile issues")
+                    exit()
+                else:
+                    print("compilation completed sucessfully")
+            except :
+                print("Make sure you have gcc installed and it is in your $PATH variable")
+                exit()
+
         self.run()
 
     def run(self):
@@ -182,7 +196,7 @@ class kickass:
             print("Opening cmd for making screenshot")
             print("run .\\"+ self.executable_name)
             run_cmd = subprocess.run(["cmd.exe"])
-        elif platform == "linux":
+        elif platform == "linux" or platform == "darwin":
             print("Opening bash for making screenshot")
             print("run ./"+ self.executable_name)
             run_bash = subprocess.run(["bash"])
@@ -209,7 +223,7 @@ class kickass:
                     print("Using grim for taking screenshot..")
                     print(os.getenv("WAYLAND_DISPLAY"))
                     grim = subprocess.run("grim", stdout=DEVNULL, stderr=DEVNULL)
-                    if grim.returncode == 1: # GNOME does not support grim screenshots
+                    if grim.returncode == 1 : #GNOME does not support grim screenshots
                         subprocess.run(['gnome-screenshot', '-a', '-f', "outputfolder/pics/"+ outputimage]) #assuming the DE in question is GNOME
                     else:
                         try:
@@ -223,6 +237,10 @@ class kickass:
                     maim_ret = subprocess.run(["maim", "-s", "outputfolder/pics/"+ outputimage])
             except PermissionError:
                 print("Make sure maim is installed")
+
+        elif platform == "darwin":
+            outputimage = self.basename + ".png"
+            ret  = subprocess.run(['screencapture', '-i',  "outputfolder/pics/"+ outputimage]) 
 
 
 def main():
