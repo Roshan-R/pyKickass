@@ -4,6 +4,8 @@ import re
 import subprocess
 from sys import platform
 
+from .tools.screenshot import takeScreenshot, get_tool
+
 # for NULL output
 try:
     from subprocess import DEVNULL  # Python 3.
@@ -14,10 +16,10 @@ from .tex import intro, section, first, end
 class kickass:
 
     def __init__(self):
-        for i in range(0, len(sys.argv)):
-            print(sys.argv[i])
+        #for i in range(0, len(sys.argv)):
+            #print(sys.argv[i])
         self.name = ""
-        self.verifyFiles()
+        self.verifyThings()
         self.kick()
         self.save_text()
         exit()
@@ -43,7 +45,7 @@ class kickass:
             zipf.close()
             print("output.zip created sucessfully!")
 
-    def verifyFiles(self):
+    def verifyThings(self):
         import os.path
         for i in range(1, len(sys.argv)-1):
             if not os.path.exists(sys.argv[i]):
@@ -53,6 +55,11 @@ class kickass:
             print("A directory called outputfolder already exists!")
             print("please delete the directory to continue")
             exit()
+        if get_tool() == "":
+            print("Could not find a native screenshot application.")
+            print("re-run the program after installig maim")
+            exit()
+        
 
     def platformStuff(self):
         if platform == "win32":
@@ -203,45 +210,7 @@ class kickass:
 
     def takescreenshot(self):
         self.compile()
-
-        if platform == "win32":
-            os.system('explorer.exe ms-screenclip:')
-            import time
-            print('Screenshot captured. Opening image for viewing.')
-            time.sleep(9) # It takes some time to register the screenshot into the clipboard
-
-            from PIL import ImageGrab
-            img = ImageGrab.grabclipboard()
-            img.show()
-            outputimage = "outputfolder/pics/" + self.basename + ".png"
-            img.save(outputimage, 'PNG')
-
-        elif platform=="linux":
-            try:
-                outputimage = self.basename + ".png"
-                if os.getenv("WAYLAND_DISPLAY"): # If user is running wayland session
-                    print("Using grim for taking screenshot..")
-                    print(os.getenv("WAYLAND_DISPLAY"))
-                    grim = subprocess.run("grim", stdout=DEVNULL, stderr=DEVNULL)
-                    if grim.returncode == 1 : #GNOME does not support grim screenshots
-                        subprocess.run(['gnome-screenshot', '-a', '-f', "outputfolder/pics/"+ outputimage]) #assuming the DE in question is GNOME
-                    else:
-                        try:
-                            cmd = 'grim -g "$(slurp)" outputfolder/pics/' + outputimage
-                            print(cmd)
-                            os.system(cmd)
-                        except:
-                            print("Not Working")
-                else:
-                    print("Using maim for taking screenshot")
-                    maim_ret = subprocess.run(["maim", "-s", "outputfolder/pics/"+ outputimage])
-            except PermissionError:
-                print("Make sure maim is installed")
-
-        elif platform == "darwin":
-            outputimage = self.basename + ".png"
-            ret  = subprocess.run(['screencapture', '-i',  "outputfolder/pics/"+ outputimage]) 
-
+        takeScreenshot(self.basename)
 
 def main():
     a = kickass()
