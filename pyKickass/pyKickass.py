@@ -172,12 +172,15 @@ class kickass:
         if platform == "darwin":
             print("Compiling ...")
             try:
-                clang_ret = subprocess.run(["clang", sys.argv[self.currentIndex],"-o",self.executable_name])
-                if clang_ret.returncode != 0:
-                    print("You have some compile issues")
-                    exit()
+                if "java" in sys.argv[self.currentIndex]:
+                    java_ret = subprocess.run(["javac", sys.argv[self.currentIndex]])
                 else:
-                    print("compilation completed sucessfully")
+                    clang_ret = subprocess.run(["clang", sys.argv[self.currentIndex],"-o",self.executable_name])
+                    if clang_ret.returncode != 0:
+                        print("You have some compile issues")
+                        exit()
+                    else:
+                        print("compilation completed sucessfully")
             except :
                 print("Make sure you have clang installed and it is in your $PATH variable")
                 exit()
@@ -185,12 +188,15 @@ class kickass:
             try:
                 # print(self.executable_name)
                 print("Compiling ...")
-                gcc_ret = subprocess.run(["gcc", sys.argv[self.currentIndex],"-o",self.executable_name])
-                if gcc_ret.returncode != 0:
-                    print("You have some compile issues")
-                    exit()
+                if "java" in sys.argv[self.currentIndex]:
+                    java_ret = subprocess.run(["javac", sys.argv[self.currentIndex]])
                 else:
-                    print("compilation completed sucessfully")
+                    gcc_ret = subprocess.run(["gcc", sys.argv[self.currentIndex],"-o",self.executable_name])
+                    if gcc_ret.returncode != 0:
+                        print("You have some compile issues")
+                        exit()
+                    else:
+                        print("compilation completed sucessfully")
             except :
                 print("Make sure you have gcc installed and it is in your $PATH variable")
                 exit()
